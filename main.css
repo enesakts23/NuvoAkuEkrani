@@ -1,0 +1,264 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f4;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #1c1c2c;
+    color: #dcdcdc;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    height: 50px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    transition: background-color 0.3s;
+}
+
+.header.dark-mode {
+    background-color: #2c2c3c;
+}
+
+.header .logo {
+    margin-right: 1rem;
+}
+
+.header .logo img {
+    height: 50px;
+    width: auto;
+    max-height: 100%;
+}
+
+.header .menu-icon {
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    margin-left: 6rem;
+    transition: color 0.3s;
+}
+
+.header.dark-mode .menu-icon {
+    color: #dcdcdc;
+}
+
+.header .search-container {
+    margin-left: 1rem;
+}
+
+.header .search-container input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    width: 200px;
+    transition: all 0.3s;
+}
+
+.header .search-container input:focus {
+    border-color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.header .header-icons {
+    margin-left: auto;
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.header .header-icons i {
+    margin-left: 1rem;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.header .header-icons i:hover {
+    color: #000;
+}
+
+.header.dark-mode .header-icons i {
+    color: #dcdcdc;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.profile-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.profile-menu a:hover {
+    background-color: #ddd;
+}
+
+.header.dark-mode .profile-menu {
+    background-color: #2c2c3c;
+}
+
+.header.dark-mode .profile-menu a {
+    color: #dcdcdc;
+}
+
+.header.dark-mode .profile-menu a:hover {
+    background-color: #3c3c4c;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+    color: #333;
+    padding: 1rem;
+    box-sizing: border-box;
+    z-index: 2;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    transition: all 0.3s;
+    transform: translateX(0);
+}
+
+.sidebar.hidden {
+    transform: translateX(-200px);
+}
+
+.sidebar.dark-mode {
+    background-color: #2c2c3c;
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.sidebar .logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+.sidebar hr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.sidebar.dark-mode hr {
+    border-top: 1px solid #555;
+}
+
+.sidebar .system-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.sidebar.dark-mode .system-title {
+    color: #dcdcdc;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 0.5rem 0;
+    background-color: #fff;
+    padding: 0.5rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    padding: 0.5rem;
+    flex-grow: 1;
+}
+
+.sidebar ul li i.icon {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+.sidebar ul li span {
+    flex-grow: 1;
+}
+
+.sidebar ul li:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.sidebar.dark-mode ul li {
+    background-color: #3c3c4c;
+    color: #dcdcdc;
+}
+
+.sidebar.dark-mode ul li:hover {
+    background-color: #4c4c5c;
+}
+
+.content {
+    margin-left: 200px;
+    padding: 60px 1rem 1rem;
+    flex-grow: 1;
+    transition: margin-left 0.3s;
+}
+
+.content.expanded {
+    margin-left: 0;
+}
+
+.content.dark-mode {
+    background-color: #1c1c2c;
+    color: #dcdcdc;
+}
+
+.container {
+    display: none;
+    padding: 60px 1rem 1rem;
+}
+
+.container.active {
+    display: block;
+}
