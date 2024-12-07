@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabit Sidebar ve Header</title>
+    <link rel="stylesheet" href="main.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="icon/logonuvo.png" alt="Header Logo">
+        </div>
+        <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+        <div class="search-container">
+            <input type="text" placeholder="Ara...">
+        </div>
+        <div class="header-icons">
+            <i class="fas fa-adjust" id="theme-toggle" onclick="toggleTheme()"></i>
+            <i class="fas fa-cog"></i>
+            <i class="fas fa-bell"></i>
+            <div class="profile-dropdown">
+                <i class="fas fa-user-circle" onclick="toggleProfileMenu()"></i>
+                <div id="profile-menu" class="profile-menu">
+                    <a href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="icon/logonuvo.png" alt="Sidebar Logo">
+        </div>
+        <hr>
+        <div class="system-title">AKÜ İZLEME SİSTEMİ</div>
+        <ul>
+            <li><a href="#" onclick="showContainer('preview')"><i class="fas fa-eye icon"></i><span>Önizleme</span></a></li>
+            <li><a href="#" onclick="showContainer('map-view')"><i class="fas fa-map-marker-alt icon"></i><span>Harita Görünümü</span></a></li>
+            <li><a href="#" onclick="showContainer('battery-view')"><i class="fas fa-battery-full icon"></i><span>Akü Görüntüleme</span></a></li>
+        </ul>
+    </aside>
+    <main class="content">
+        <div id="map-view" class="container">This is the Map View container.</div>
+        <div id="preview" class="container">This is the Preview container.</div>
+        <div id="battery-view" class="container">This is the Battery View container.</div>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
