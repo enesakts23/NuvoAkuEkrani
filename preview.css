@@ -28,6 +28,22 @@
     grid-column: span 2;
 }
 
+/* Renk Özelleştirmeleri */
+.widget-total {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.widget-working {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.widget-broken {
+    background-color: #dc3545;
+    color: #fff;
+}
+
 /* Dark mode */
 .dark-mode .widget {
     background-color: #333;
