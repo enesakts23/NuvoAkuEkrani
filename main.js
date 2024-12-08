@@ -17,11 +17,35 @@ function showContainer(containerId) {
     containers.forEach(container => {
         container.classList.remove('active');
     });
+
     const activeContainer = document.getElementById(containerId);
     activeContainer.classList.add('active');
+    
+    // CSS ve JS dosyalarını yönet
+    manageCSSAndJS(containerId);
 }
 
-// Profile menu toggle function
+function manageCSSAndJS(containerId) {
+    const mapviewCSS = document.getElementById('mapview-css');
+    const batteryviewCSS = document.getElementById('batteryview-css');
+    const mapviewJS = document.getElementById('mapview-js');
+    const batteryviewJS = document.getElementById('batteryview-js');
+    
+    if (containerId === 'map-view') {
+        mapviewCSS.disabled = false;
+        batteryviewCSS.disabled = true;
+        mapviewJS.removeAttribute('defer');
+    } else if (containerId === 'battery-view') {
+        mapviewCSS.disabled = true;
+        batteryviewCSS.disabled = false;
+        batteryviewJS.removeAttribute('defer');
+    } else {
+        mapviewCSS.disabled = true;
+        batteryviewCSS.disabled = true;
+    }
+}
+
+// Profil menüsü toggle fonksiyonu
 function toggleProfileMenu() {
     const profileMenu = document.getElementById('profile-menu');
     profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
