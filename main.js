@@ -26,23 +26,32 @@ function showContainer(containerId) {
 }
 
 function manageCSSAndJS(containerId) {
+    const previewCSS = document.getElementById('preview-css');
     const mapviewCSS = document.getElementById('mapview-css');
     const batteryviewCSS = document.getElementById('batteryview-css');
+    const previewJS = document.getElementById('preview-js');
     const mapviewJS = document.getElementById('mapview-js');
     const batteryviewJS = document.getElementById('batteryview-js');
     
+    // CSS dosyalarını kontrol et
     if (containerId === 'map-view') {
         mapviewCSS.disabled = false;
         batteryviewCSS.disabled = true;
-        mapviewJS.removeAttribute('defer');
+        previewCSS.disabled = true;
     } else if (containerId === 'battery-view') {
         mapviewCSS.disabled = true;
         batteryviewCSS.disabled = false;
-        batteryviewJS.removeAttribute('defer');
-    } else {
+        previewCSS.disabled = true;
+    } else if (containerId === 'preview') {
+        previewCSS.disabled = false;
         mapviewCSS.disabled = true;
         batteryviewCSS.disabled = true;
     }
+    
+    // JS dosyalarını kontrol et
+    previewJS.disabled = containerId !== 'preview';
+    mapviewJS.disabled = containerId !== 'map-view';
+    batteryviewJS.disabled = containerId !== 'battery-view';
 }
 
 // Profil menüsü toggle fonksiyonu

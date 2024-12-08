@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,11 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- CSS Dosyaları -->
-    <link rel="stylesheet" href="preview.css">
+    <link rel="stylesheet" href="preview.css" id="preview-css">
     <link rel="stylesheet" href="batteryview.css" id="batteryview-css" disabled>
     <link rel="stylesheet" href="mapview.css" id="mapview-css" disabled>
 </head>
+
 <body>
     <header class="header">
         <div class="logo">
@@ -40,20 +42,51 @@
         <hr>
         <div class="system-title">AKÜ İZLEME SİSTEMİ</div>
         <ul>
-            <li><a href="#" onclick="showContainer('preview')"><i class="fas fa-eye icon"></i><span>Önizleme</span></a></li>
-            <li><a href="#" onclick="showContainer('map-view')"><i class="fas fa-map-marker-alt icon"></i><span>Harita Görünümü</span></a></li>
-            <li><a href="#" onclick="showContainer('battery-view')"><i class="fas fa-battery-full icon"></i><span>Akü Görüntüleme</span></a></li>
+            <li><a href="#" onclick="showContainer('preview')"><i class="fas fa-eye icon"></i><span>Önizleme</span></a>
+            </li>
+            <li><a href="#" onclick="showContainer('map-view')"><i class="fas fa-map-marker-alt icon"></i><span>Harita
+                        Görünümü</span></a></li>
+            <li><a href="#" onclick="showContainer('battery-view')"><i class="fas fa-battery-full icon"></i><span>Akü
+                        Görüntüleme</span></a></li>
         </ul>
     </aside>
     <main class="content">
         <div id="map-view" class="container">This is the Map View container.</div>
-        <div id="preview" class="container">This is the Preview container.</div>
-        <div id="battery-view" class="container"></div>
+        <div id="preview" class="container active">
+            <div class="widget-grid">
+                <div class="widget">
+                    <h3>Toplam Batarya Sayısı</h3>
+                    <p>16</p>
+                </div>
+                <div class="widget">
+                    <h3>Çalışan Batarya Sayısı</h3>
+                    <p>15</p>
+                </div>
+                <div class="widget">
+                    <h3>Bozuk Batarya Sayısı</h3>
+                    <p>1</p>
+                </div>
+                <div class="widget">
+                    <h3>Batarya Durumu</h3>
+                    <canvas id="batteryPieChart"></canvas>
+                </div>
+                <div class="widget widget-wide">
+                    <h3>Bildirimler</h3>
+                    <ul id="notificationList">
+                        <li>Batarya 1'de voltaj düşüklüğü tespit edildi.</li>
+                        <li>Batarya 5'in sıcaklık değeri normalden yüksek.</li>
+                        <!-- Diğer bildirimler burada olacak -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="battery-view" class="container">This is the Battery View container.</div>
     </main>
     <!-- JavaScript Dosyaları -->
     <script src="main.js"></script>
     <script src="preview.js" id="preview-js"></script>
-    <script src="batteryview.js" id="batteryview-js" defer></script>
-    <script src="mapview.js" id="mapview-js" defer></script>
+    <script src="batteryview.js" id="batteryview-js" defer disabled></script>
+    <script src="mapview.js" id="mapview-js" defer disabled></script>
 </body>
+
 </html>
