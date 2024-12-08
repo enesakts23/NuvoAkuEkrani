@@ -1,0 +1,71 @@
+.battery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    padding: 20px;
+    position: relative;
+}
+
+.battery-item {
+    background-color: #ccc;
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
+    position: relative;
+}
+
+.battery-number {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.battery-item:hover {
+    background-color: #aaa;
+    border-color: #777;
+}
+
+.battery-title {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.battery-temp, .battery-voltage {
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+/* Dark mode */
+.dark-mode .battery-item {
+    background-color: #333;
+    border-color: #555;
+    color: #dcdcdc;
+}
+
+.dark-mode .battery-item:hover {
+    background-color: #444;
+    border-color: #666;
+}
+
+.dark-mode .battery-title, .dark-mode .battery-temp, .dark-mode .battery-voltage {
+    color: #dcdcdc;
+}
+
+.dark-mode .battery-number {
+    background-color: #444;
+    border-color: #666;
+    color: #dcdcdc;
+}
