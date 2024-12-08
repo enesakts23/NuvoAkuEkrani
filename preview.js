@@ -1,18 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const ctx = document.getElementById('batteryPieChart').getContext('2d');
-    const batteryPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Çalışan Batarya', 'Bozuk Batarya'],
-            datasets: [{
-                data: [15, 1],
-                backgroundColor: ['#007bff', '#dc3545'],
-                hoverBackgroundColor: ['#0056b3', '#c82333']
-            }]
+    const options = {
+        chart: {
+            type: 'pie',
+            width: 350, // Grafiğin genişliğini biraz daha büyük yapıyoruz
+            toolbar: {
+                show: false
+            }
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-        }
-    });
+        series: [15, 1], // Çalışan Batarya ve Bozuk Batarya değerleri
+        labels: ['Çalışan Batarya', 'Bozuk Batarya'],
+        colors: ['#007bff', '#dc3545'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 250
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    const apexChart = new ApexCharts(document.querySelector("#batteryApexChart"), options);
+    apexChart.render();
 });

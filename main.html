@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="preview.css" id="preview-css">
     <link rel="stylesheet" href="batteryview.css" id="batteryview-css" disabled>
     <link rel="stylesheet" href="mapview.css" id="mapview-css" disabled>
+    <!-- ApexCharts CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
@@ -67,7 +69,8 @@
                     <p>1</p>
                 </div>
                 <div class="widget">
-                    <h3>Batarya Durumu</h3> <canvas id="batteryPieChart"></canvas>
+                    <h3>Batarya Durumu</h3>
+                    <div id="batteryApexChart"></div> <!-- Canvas yerine div kullanacağız -->
                 </div>
                 <div class="widget widget-wide">
                     <h3>Bildirimler</h3>
