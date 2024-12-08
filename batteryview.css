@@ -7,9 +7,12 @@
 }
 
 .battery-item {
-    background-color: #ccc;
-    border: 1px solid #999;
-    border-radius: 4px;
+    background-color: #fff;
+    /* İç kısım beyaz */
+    border: 2px solid #007bff;
+    /* Dış çerçeve mavi */
+    border-radius: 8px;
+    /* Hafif oval köşeler */
     padding: 20px;
     text-align: center;
     font-weight: bold;
@@ -23,7 +26,7 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: #fff;
-    border: 1px solid #999;
+    border: 1px solid #007bff;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -34,18 +37,22 @@
 }
 
 .battery-item:hover {
-    background-color: #aaa;
-    border-color: #777;
+    background-color: #e6f0ff;
+    border-color: #0056b3;
 }
 
-.battery-title {
-    margin-bottom: 10px;
-    font-size: 1.2em;
-}
-
-.battery-temp, .battery-voltage {
+.battery-temp,
+.battery-voltage {
     margin-bottom: 5px;
     font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.battery-temp i,
+.battery-voltage i {
+    margin-right: 5px;
 }
 
 /* Dark mode */
@@ -58,10 +65,6 @@
 .dark-mode .battery-item:hover {
     background-color: #444;
     border-color: #666;
-}
-
-.dark-mode .battery-title, .dark-mode .battery-temp, .dark-mode .battery-voltage {
-    color: #dcdcdc;
 }
 
 .dark-mode .battery-number {

@@ -13,11 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
         batteryNumber.classList.add('battery-number');
         
         const batteryTemp = document.createElement('div');
-        batteryTemp.textContent = `Sıcaklık: ${getRandomTemp()}°C`;
+        const tempIcon = document.createElement('i');
+        tempIcon.classList.add('fas', 'fa-thermometer-half');
+        batteryTemp.appendChild(tempIcon);
+        const tempValue = document.createElement('span');
+        tempValue.textContent = ` ${getRandomTemp()}°C`;
+        batteryTemp.appendChild(tempValue);
         batteryTemp.classList.add('battery-temp');
         
         const batteryVoltage = document.createElement('div');
-        batteryVoltage.textContent = `Voltaj: ${getRandomVoltage()}V`;
+        const voltageIcon = document.createElement('i');
+        voltageIcon.classList.add('fas', 'fa-bolt');
+        batteryVoltage.appendChild(voltageIcon);
+        const voltageValue = document.createElement('span');
+        voltageValue.textContent = ` ${getRandomVoltage()}V`;
+        batteryVoltage.appendChild(voltageValue);
         batteryVoltage.classList.add('battery-voltage');
         
         batteryItem.appendChild(batteryNumber);
