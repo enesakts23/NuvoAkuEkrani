@@ -262,3 +262,9 @@ body.dark-mode {
 .container.active {
     display: block;
 }
+
+/* Harita div'inin stili */
+#map {
+    width: 100%;
+    height: 100%;
+}
