@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sabit Sidebar ve Header</title>
     <link rel="stylesheet" href="main.css">
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- CSS Dosyaları -->
     <link rel="stylesheet" href="preview.css" id="preview-css">
     <link rel="stylesheet" href="batteryview.css" id="batteryview-css" disabled>
     <link rel="stylesheet" href="mapview.css" id="mapview-css" disabled>
-    <!-- ApexCharts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- Leaflet CSS ve JS dosyalarını ekleyin -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
@@ -47,9 +43,12 @@
         <hr>
         <div class="system-title">AKÜ İZLEME SİSTEMİ</div>
         <ul>
-            <li><a href="#" onclick="showContainer('preview')"><i class="fas fa-eye icon"></i><span>Önizleme</span></a></li>
-            <li><a href="#" onclick="showContainer('map-view')"><i class="fas fa-map-marker-alt icon"></i><span>Harita Görünümü</span></a></li>
-            <li><a href="#" onclick="showContainer('battery-view')"><i class="fas fa-battery-full icon"></i><span>Akü Görüntüleme</span></a></li>
+            <li><a href="#" onclick="showContainer('preview')"><i class="fas fa-eye icon"></i><span>Önizleme</span></a>
+            </li>
+            <li><a href="#" onclick="showContainer('map-view')"><i class="fas fa-map-marker-alt icon"></i><span>Harita
+                        Görünümü</span></a></li>
+            <li><a href="#" onclick="showContainer('battery-view')"><i class="fas fa-battery-full icon"></i><span>Akü
+                        Görüntüleme</span></a></li>
         </ul>
     </aside>
     <main class="content">
@@ -83,13 +82,50 @@
                 </div>
             </div>
         </div>
-        <div id="battery-view" class="container">This is the Battery View container.</div>
+        <div id="battery-view" class="container"></div>
     </main>
     <!-- JavaScript Dosyaları -->
     <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/paho-mqtt@1.0.3/mqttws31.min.js"></script>
     <script src="preview.js" id="preview-js"></script>
     <script src="batteryview.js" id="batteryview-js" defer disabled></script>
     <script src="mapview.js" id="mapview-js" defer disabled></script>
+    <script>
+        const BROKER = "81.214.12.250";
+        const PORT = 9001;
+        const TOPIC = "gas";
+        const client = new Paho.MQTT.Client(BROKER, PORT, "clientId-web");
+        const options = { onSuccess: onConnect, onFailure: onFailure };
+        client.connect(options);
+
+        function onConnect() {
+            console.log("Connected to broker.");
+            client.subscribe(TOPIC);
+        }
+
+        function onFailure(responseObject) {
+            console.log("Failed to connect: " + responseObject.errorMessage);
+        }
+
+        client.onMessageArrived = function (message) {
+            try {
+                const payloadString = message.payloadString;
+                const parts = payloadString.split(',');
+                const jsonMessage = {};
+
+                parts.forEach(part => {
+                    const [key, value] = part.split(':');
+                    jsonMessage[key.trim()] = value.trim();
+                });
+
+                console.log("JSON message received on topic '" + message.destinationName + "': ", jsonMessage);
+            } catch (e) {
+                console.log("Failed to parse message to JSON: " + e.message);
+            }
+        };
+
+
+    </script>
 </body>
 
 </html>
