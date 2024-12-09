@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!map) {
         const mapContainer = document.getElementById('map');
         if (mapContainer) {
-            map = L.map('map').setView([51.505, -0.09], 13); // Koordinatları ve zoom seviyesini ayarlayın
+            map = L.map('map').setView([41.0082, 28.9784], 9); // Koordinatları ve zoom seviyesini ayarlayın
 
             // Uydu görünümü katmanını ekle
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }).addTo(map);
 
             // Haritaya bir işaretçi ekleyin
-            L.marker([51.5, -0.09]).addTo(map)
+            L.marker([41.0082, 28.9784]).addTo(map)
                 .bindPopup('Bir konum.')
                 .openPopup();
         }
