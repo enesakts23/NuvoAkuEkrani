@@ -91,41 +91,42 @@
     <script src="batteryview.js" id="batteryview-js" defer disabled></script>
     <script src="mapview.js" id="mapview-js" defer disabled></script>
     <script>
+        let globalJsonMessage; // Global değişken
+    
         const BROKER = "81.214.12.250";
         const PORT = 9001;
-        const TOPIC = "gas";
+        const TOPIC = "bat";
         const client = new Paho.MQTT.Client(BROKER, PORT, "clientId-web");
         const options = { onSuccess: onConnect, onFailure: onFailure };
         client.connect(options);
-
+    
         function onConnect() {
             console.log("Connected to broker.");
             client.subscribe(TOPIC);
         }
-
+    
         function onFailure(responseObject) {
             console.log("Failed to connect: " + responseObject.errorMessage);
         }
-
+    
         client.onMessageArrived = function (message) {
             try {
                 const payloadString = message.payloadString;
                 const parts = payloadString.split(',');
-                const jsonMessage = {};
-
+                globalJsonMessage = {}; 
+    
                 parts.forEach(part => {
                     const [key, value] = part.split(':');
-                    jsonMessage[key.trim()] = value.trim();
+                    globalJsonMessage[key.trim()] = value.trim();
                 });
-
-                console.log("JSON message received on topic '" + message.destinationName + "': ", jsonMessage);
+    
+                console.log("JSON message received on topic '" + message.destinationName + "': ", globalJsonMessage);
             } catch (e) {
                 console.log("Failed to parse message to JSON: " + e.message);
             }
         };
-
-
     </script>
+    
 </body>
 
 </html>
