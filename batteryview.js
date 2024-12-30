@@ -1,3 +1,7 @@
+const BROKER = "81.214.12.250";
+const PORT = 9001;
+const TOPIC = "bat";
+
 document.addEventListener('DOMContentLoaded', () => {
     const batteryViewContainer = document.getElementById('battery-view');
 
@@ -18,8 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tempIcon.classList.add('fas', 'fa-thermometer-half');
         batteryTemp.appendChild(tempIcon);
         const tempValue = document.createElement('span');
-        tempValue.textContent = ` ${getRandomTemp()}°C`;
-        batteryTemp.appendChild(tempValue);
+        batteryTemp.appendChild(tempValue); // Başlangıçta boş
         batteryTemp.classList.add('battery-temp');
 
         const batteryVoltage = document.createElement('div');
@@ -27,8 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         voltageIcon.classList.add('fas', 'fa-bolt');
         batteryVoltage.appendChild(voltageIcon);
         const voltageValue = document.createElement('span');
-        voltageValue.textContent = ` ${getRandomVoltage()}V`;
-        batteryVoltage.appendChild(voltageValue);
+        batteryVoltage.appendChild(voltageValue); // Başlangıçta boş
         batteryVoltage.classList.add('battery-voltage');
 
         batteryItem.appendChild(batteryNumber);
@@ -45,20 +47,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     batteryViewContainer.appendChild(batteryGrid);
 
-    // Global değişkeni kontrol edelim ve işleyelim
-    if (globalJsonMessage) {
-        console.log(globalJsonMessage); // Global değişkeni kontrol edelim
-        // globalJsonMessage içindeki verilerle daha fazla işlem yapabilirsin
+    // MQTT Bağlantısı
+    const client = new Paho.MQTT.Client(BROKER, PORT, "clientId-" + parseInt(Math.random() * 100));
+
+    client.onConnectionLost = (responseObject) => {
+        if (responseObject.errorCode !== 0) {
+            console.log("onConnectionLost:" + responseObject.errorMessage);
+        }
+    };
+
+    client.onMessageArrived = (message) => {
+        try {
+            const data = JSON.parse(message.payloadString);
+            if (Array.isArray(data)) {
+                data.forEach(updateBatteryData);
+            } else {
+                updateBatteryData(data); // Tek bir veri objesi geldiğinde
+            }
+        } catch (error) {
+            console.error("Veri ayrıştırma hatası:", error);
+        }
+    };
+
+    client.connect({
+        onSuccess: () => {
+            console.log("Bağlantı başarılı!");
+            setTimeout(() => {
+                client.subscribe(TOPIC);
+                console.log("MQTT verilerini almaya başlandı.");
+            }, 5000); // 5 saniye bekle
+        }
+    });
+
+    function updateBatteryData(battery) {
+        Object.keys(battery).forEach((key) => {
+            if (key.startsWith("v")) {
+                const batteryNumber = key.substring(1);
+                const batteryItem = document.querySelector(`[data-battery-number="${batteryNumber}"]`);
+                if (batteryItem) {
+                    const voltageValue = batteryItem.querySelector('.battery-voltage span');
+                    voltageValue.textContent = ` ${battery[key]}V`;
+                }
+            } else if (key.startsWith("t")) {
+                const batteryNumber = key.substring(1);
+                const batteryItem = document.querySelector(`[data-battery-number="${batteryNumber}"]`);
+                if (batteryItem) {
+                    const tempValue = batteryItem.querySelector('.battery-temp span');
+                    tempValue.textContent = ` ${battery[key]}°C`;
+                }
+            }
+        });
     }
 });
-
-function getRandomTemp() {
-    return (Math.random() * 40).toFixed(1); // 0.0 - 40.0 arası rastgele sıcaklık
-}
-
-function getRandomVoltage() {
-    return (Math.random() * 5 + 10).toFixed(2); // 10.00 - 15.00 arası rastgele voltaj
-}
 
 function showBatteryDetails(batteryNum) {
     const existingContainer = document.getElementById('battery-details');
@@ -163,11 +203,9 @@ function renderVoltageChart() {
 }
 
 function generateTemperatureData() {
-    // Haftanın 7 günü için rastgele sıcaklık değerleri oluştur
     return Array.from({ length: 7 }, () => (Math.random() * 40).toFixed(1));
 }
 
 function generateVoltageData() {
-    // Haftanın 7 günü için rastgele voltaj değerleri oluştur
     return Array.from({ length: 7 }, () => (Math.random() * 5 + 10).toFixed(2));
 }
