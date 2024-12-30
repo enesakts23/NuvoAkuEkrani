@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (batteryItem) {
                     const voltageValue = batteryItem.querySelector('.battery-voltage span');
                     voltageValue.textContent = ` ${battery[key]}V`;
+                    highlightBatteryCell(voltageValue);
                 }
             } else if (key.startsWith("t")) {
                 const batteryNumber = key.substring(1);
@@ -94,9 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (batteryItem) {
                     const tempValue = batteryItem.querySelector('.battery-temp span');
                     tempValue.textContent = ` ${battery[key]}°C`;
+                    highlightBatteryCell(tempValue);
                 }
             }
         });
+    }
+
+    function highlightBatteryCell(cell) {
+        cell.style.backgroundColor = 'yellow';
+        setTimeout(() => {
+            cell.style.backgroundColor = '';
+        }, 2000);
     }
 });
 
