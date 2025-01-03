@@ -79,6 +79,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    function highlightBatteryNumber(batteryNumber) {
+        const batteryNumberElement = document.querySelector(`[data-battery-number="${batteryNumber}"] .battery-number`);
+        if (batteryNumberElement) {
+            batteryNumberElement.style.backgroundColor = 'green';
+            setTimeout(() => {
+                batteryNumberElement.style.backgroundColor = '';
+            }, 2000);
+        }
+    }
+
     function updateBatteryData(battery) {
         Object.keys(battery).forEach((key) => {
             if (key.startsWith("v")) {
@@ -87,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (batteryItem) {
                     const voltageValue = batteryItem.querySelector('.battery-voltage span');
                     voltageValue.textContent = ` ${battery[key]}V`;
-                    highlightBatteryCell(voltageValue);
+                    highlightBatteryNumber(batteryNumber);
                 }
             } else if (key.startsWith("t")) {
                 const batteryNumber = key.substring(1);
@@ -95,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (batteryItem) {
                     const tempValue = batteryItem.querySelector('.battery-temp span');
                     tempValue.textContent = ` ${battery[key]}°C`;
-                    highlightBatteryCell(tempValue);
+                    highlightBatteryNumber(batteryNumber);
                 }
             }
         });
@@ -107,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.style.backgroundColor = '';
         }, 2000);
     }
+
 });
 
 function showBatteryDetails(batteryNum) {
