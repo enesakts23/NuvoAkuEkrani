@@ -1,11 +1,11 @@
-let map; // Harita değişkenini dışarıda tanımlıyoruz
+let map; 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Haritayı yalnızca gerektiğinde başlat
+    
     if (!map) {
         const mapContainer = document.getElementById('map');
         if (mapContainer) {
-            map = L.map('map').setView([41.0082, 28.9784], 9); // Koordinatları ve zoom seviyesini ayarlayın
+            map = L.map('map').setView([41.0082, 28.9784], 9); 
 
             // Uydu görünümü katmanını ekle
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // Haritaya bir işaretçi ekleyin
+            
             L.marker([41.0082, 28.9784]).addTo(map)
                 .bindPopup('Bir konum.')
                 .openPopup();
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Container değiştirildiğinde haritayı yeniden boyutlandır
+
 function showContainer(containerId) {
     const containers = document.querySelectorAll('.container');
     containers.forEach(container => {
@@ -31,12 +31,12 @@ function showContainer(containerId) {
     const activeContainer = document.getElementById(containerId);
     activeContainer.classList.add('active');
     
-    // CSS ve JS dosyalarını yönet
+    
     manageCSSAndJS(containerId);
 
     if (containerId === 'map-view' && map) {
         setTimeout(() => {
             map.invalidateSize();
-        }, 100); // Harita boyutunu güncellemek için kısa bir gecikme ekledik
+        }, 100); 
     }
 }

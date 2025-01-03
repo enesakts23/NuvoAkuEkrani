@@ -1,4 +1,3 @@
-/* Harita için temel stil */
 #map {
     width: 100%;
     height: 100%;
@@ -6,9 +5,9 @@
     z-index: 0;
 }
 
-/* Diğer bileşenlerle çakışmayı önlemek için genel ayarlar */
+
 body {
-    overflow: hidden; /* Taşmayı önlemek için */
+    overflow: hidden; 
 }
 
 .content {
@@ -20,5 +19,5 @@ body {
 .container {
     position: relative;
     width: 100%;
-    height: calc(100vh - 50px); /* Header'ın yüksekliğini çıkararak ayarla */
+    height: calc(100vh - 50px); 
 }
