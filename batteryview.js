@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tempIcon.classList.add('fas', 'fa-thermometer-half');
         batteryTemp.appendChild(tempIcon);
         const tempValue = document.createElement('span');
-        batteryTemp.appendChild(tempValue); // Başlangıçta boş
+        batteryTemp.appendChild(tempValue);
         batteryTemp.classList.add('battery-temp');
 
         const batteryVoltage = document.createElement('div');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         voltageIcon.classList.add('fas', 'fa-bolt');
         batteryVoltage.appendChild(voltageIcon);
         const voltageValue = document.createElement('span');
-        batteryVoltage.appendChild(voltageValue); // Başlangıçta boş
+        batteryVoltage.appendChild(voltageValue);
         batteryVoltage.classList.add('battery-voltage');
 
         batteryItem.appendChild(batteryNumber);
@@ -96,16 +96,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 const batteryItem = document.querySelector(`[data-battery-number="${batteryNumber}"]`);
                 if (batteryItem) {
                     const voltageValue = batteryItem.querySelector('.battery-voltage span');
-                    voltageValue.textContent = ` ${battery[key]}V`;
-                    highlightBatteryNumber(batteryNumber);
+                    if (battery[key] >= 0) {
+                        voltageValue.textContent = ` ${battery[key]}V`;
+                        highlightBatteryNumber(batteryNumber);
+                    } else {
+                        voltageValue.textContent = '';
+                    }
                 }
             } else if (key.startsWith("t")) {
                 const batteryNumber = key.substring(1);
                 const batteryItem = document.querySelector(`[data-battery-number="${batteryNumber}"]`);
                 if (batteryItem) {
                     const tempValue = batteryItem.querySelector('.battery-temp span');
-                    tempValue.textContent = ` ${battery[key]}°C`;
-                    highlightBatteryNumber(batteryNumber);
+                    if (battery[key] >= -20) {
+                        tempValue.textContent = ` ${battery[key]}°C`;
+                        highlightBatteryNumber(batteryNumber);
+                    } else {
+                        tempValue.textContent = '';
+                    }
                 }
             }
         });
