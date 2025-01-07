@@ -47,7 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     batteryViewContainer.appendChild(batteryGrid);
 
-    // MQTT Bağlantısı
+    const newItem = document.createElement('div');
+    newItem.classList.add('additional-item');
+
+    ['t', 'h', 'q', 's', 'r'].forEach(type => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('info-item', `${type}-item`);
+        itemDiv.innerHTML = `${type}: <span></span>`;
+        newItem.appendChild(itemDiv);
+    });
+
+    batteryViewContainer.appendChild(newItem);
+
     const client = new Paho.MQTT.Client(BROKER, PORT, "clientId-" + parseInt(Math.random() * 100));
 
     client.onConnectionLost = (responseObject) => {
@@ -62,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(data)) {
                 data.forEach(updateBatteryData);
             } else {
-                updateBatteryData(data); // Tek bir veri objesi geldiğinde
+                updateBatteryData(data);
             }
         } catch (error) {
             console.error("Veri ayrıştırma hatası:", error);
@@ -75,58 +86,68 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 client.subscribe(TOPIC);
                 console.log("MQTT verilerini almaya başlandı.");
-            }, 5000); // 5 saniye bekle
+            }, 5000);
         }
     });
+});
 
-    function highlightBatteryNumber(batteryNumber) {
-        const batteryNumberElement = document.querySelector(`[data-battery-number="${batteryNumber}"] .battery-number`);
-        if (batteryNumberElement) {
-            batteryNumberElement.style.backgroundColor = 'green';
-            setTimeout(() => {
-                batteryNumberElement.style.backgroundColor = '';
-            }, 2000);
-        }
-    }
-
-    function updateBatteryData(battery) {
-        Object.keys(battery).forEach((key) => {
-            if (key.startsWith("v")) {
-                const batteryNumber = key.substring(1);
-                const batteryItem = document.querySelector(`[data-battery-number="${batteryNumber}"]`);
-                if (batteryItem) {
-                    const voltageValue = batteryItem.querySelector('.battery-voltage span');
-                    if (battery[key] >= 0) {
-                        voltageValue.textContent = ` ${battery[key]}V`;
-                        highlightBatteryNumber(batteryNumber);
-                    } else {
-                        voltageValue.textContent = '';
-                    }
-                }
-            } else if (key.startsWith("t")) {
-                const batteryNumber = key.substring(1);
-                const batteryItem = document.querySelector(`[data-battery-number="${batteryNumber}"]`);
-                if (batteryItem) {
-                    const tempValue = batteryItem.querySelector('.battery-temp span');
-                    if (battery[key] >= -20) {
-                        tempValue.textContent = ` ${battery[key]}°C`;
-                        highlightBatteryNumber(batteryNumber);
-                    } else {
-                        tempValue.textContent = '';
-                    }
-                }
-            }
-        });
-    }
-
-    function highlightBatteryCell(cell) {
-        cell.style.backgroundColor = 'yellow';
+function highlightBatteryNumber(batteryNumber) {
+    const batteryNumberElement = document.querySelector(`[data-battery-number="${batteryNumber}"] .battery-number`);
+    if (batteryNumberElement) {
+        batteryNumberElement.style.backgroundColor = 'green';
         setTimeout(() => {
-            cell.style.backgroundColor = '';
+            batteryNumberElement.style.backgroundColor = '';
         }, 2000);
     }
+}
 
-});
+function updateBatteryData(battery) {
+    Object.keys(battery).forEach((key) => {
+        if (key.startsWith("v")) {
+            const batteryNumber = key.substring(1);
+            const batteryItem = document.querySelector(`[data-battery-number="${batteryNumber}"]`);
+            if (batteryItem) {
+                const voltageValue = batteryItem.querySelector('.battery-voltage span');
+                if (battery[key] >= 0) {
+                    voltageValue.textContent = ` ${battery[key]}V`;
+                    highlightBatteryNumber(batteryNumber);
+                } else {
+                    voltageValue.textContent = '';
+                }
+            }
+        } else if (key.startsWith("t")) {
+            const batteryNumber = key.substring(1);
+            const batteryItem = document.querySelector(`[data-battery-number="${batteryNumber}"]`);
+            if (batteryItem) {
+                const tempValue = batteryItem.querySelector('.battery-temp span');
+                if (battery[key] >= -20) {
+                    tempValue.textContent = ` ${battery[key]}°C`;
+                    highlightBatteryNumber(batteryNumber);
+                } else {
+                    tempValue.textContent = '';
+                }
+            }
+        }
+
+        if (battery.id === 15) {
+            const additionalItem = document.querySelector('.additional-item');
+            if (additionalItem) {
+                additionalItem.querySelector('.t-item span').textContent = ` ${battery.t}°C`;
+                additionalItem.querySelector('.h-item span').textContent = ` ${battery.h}%`;
+                additionalItem.querySelector('.q-item span').textContent = ` ${battery.q}`;
+                additionalItem.querySelector('.s-item span').textContent = ` ${battery.s}`;
+                additionalItem.querySelector('.r-item span').textContent = ` ${battery.r}`;
+            }
+        }
+    });
+}
+
+function highlightBatteryCell(cell) {
+    cell.style.backgroundColor = 'yellow';
+    setTimeout(() => {
+        cell.style.backgroundColor = '';
+    }, 2000);
+}
 
 function showBatteryDetails(batteryNum) {
     const existingContainer = document.getElementById('battery-details');
