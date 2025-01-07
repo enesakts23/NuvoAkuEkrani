@@ -5,6 +5,19 @@ const TOPIC = "bat";
 document.addEventListener('DOMContentLoaded', () => {
     const batteryViewContainer = document.getElementById('battery-view');
 
+    // Additional item'ı ilk olarak ekleyelim
+    const newItem = document.createElement('div');
+    newItem.classList.add('additional-item');
+
+    ['t', 'h', 'q', 's', 'r'].forEach(type => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('info-item', `${type}-item`);
+        itemDiv.innerHTML = `${type}: <span></span>`;
+        newItem.appendChild(itemDiv);
+    });
+
+    batteryViewContainer.appendChild(newItem);
+
     const batteryGrid = document.createElement('div');
     batteryGrid.classList.add('battery-grid');
 
@@ -46,18 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     batteryViewContainer.appendChild(batteryGrid);
-
-    const newItem = document.createElement('div');
-    newItem.classList.add('additional-item');
-
-    ['t', 'h', 'q', 's', 'r'].forEach(type => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('info-item', `${type}-item`);
-        itemDiv.innerHTML = `${type}: <span></span>`;
-        newItem.appendChild(itemDiv);
-    });
-
-    batteryViewContainer.appendChild(newItem);
 
     const client = new Paho.MQTT.Client(BROKER, PORT, "clientId-" + parseInt(Math.random() * 100));
 
