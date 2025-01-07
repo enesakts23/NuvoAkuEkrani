@@ -106,18 +106,25 @@
     background-color: #fff;
     border: 2px solid #007bff;
     border-radius: 8px;
-    padding: 10px; 
+    padding: 10px;
     text-align: center;
     font-weight: bold;
-    margin: 20px auto; /* Burada margin özelliğini güncelledik */
+    margin: 20px auto;
     transition: background-color 0.3s, border-color 0.3s;
-    width: 200px;
+    width: 300px;  /* Genişliği arttırıldı */
     height: 100px;
 }
 
 .info-item {
     margin-bottom: 5px;
     font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-item i {
+    margin-right: 5px;
 }
 
 
@@ -158,5 +165,9 @@
 }
 
 .dark-mode .chart-container {
+    color: #dcdcdc;
+}
+
+.dark-mode .info-item {
     color: #dcdcdc;
 }

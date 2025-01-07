@@ -9,10 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const newItem = document.createElement('div');
     newItem.classList.add('additional-item');
 
+    const icons = {
+        t: 'fas fa-thermometer-half',  // Sıcaklık ikonu
+        h: 'fas fa-tint',  // Nem ikonu
+        q: 'fas fa-wind',  // Temizlik endeksi ikonu
+        s: 'fas fa-burn',  // Gaz rezistans ikonu (Güncellendi)
+        r: 'fas fa-radiation-alt'  // Redoks gaz ikonu (Güncellendi)
+    };
+    
+
     ['t', 'h', 'q', 's', 'r'].forEach(type => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('info-item', `${type}-item`);
-        itemDiv.innerHTML = `${type}: <span></span>`;
+        
+        const icon = document.createElement('i');
+        icon.className = icons[type];
+        itemDiv.appendChild(icon);
+
+        const span = document.createElement('span');
+        itemDiv.appendChild(span);
+
         newItem.appendChild(itemDiv);
     });
 
