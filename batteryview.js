@@ -5,18 +5,16 @@ const TOPIC = "bat";
 document.addEventListener('DOMContentLoaded', () => {
     const batteryViewContainer = document.getElementById('battery-view');
 
-    // Additional item'ı ilk olarak ekleyelim
     const newItem = document.createElement('div');
     newItem.classList.add('additional-item');
 
     const icons = {
-        t: 'fas fa-thermometer-half',  // Sıcaklık ikonu
-        h: 'fas fa-tint',  // Nem ikonu
-        q: 'fas fa-wind',  // Temizlik endeksi ikonu
-        s: 'fas fa-burn',  // Gaz rezistans ikonu (Güncellendi)
-        r: 'fas fa-radiation-alt'  // Redoks gaz ikonu (Güncellendi)
+        t: 'fas fa-thermometer-half', 
+        h: 'fas fa-tint', 
+        q: 'fas fa-wind', 
+        s: 'fas fa-burn', 
+        r: 'fas fa-radiation-alt' 
     };
-    
 
     ['t', 'h', 'q', 's', 'r'].forEach(type => {
         const itemDiv = document.createElement('div');
@@ -69,6 +67,15 @@ document.addEventListener('DOMContentLoaded', () => {
         batteryItem.addEventListener('click', (event) => {
             const batteryNum = event.currentTarget.dataset.batteryNumber;
             showBatteryDetails(batteryNum);
+
+            fetch(`getBatteryData.php?bat_number=${batteryNum}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Veritabanı verileri:', data);
+                })
+                .catch(error => {
+                    console.error('Veri çekme hatası:', error);
+                });
         });
 
         batteryGrid.appendChild(batteryItem);
