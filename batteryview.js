@@ -301,10 +301,3 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null]) {
     chart.render();
 }
 
-// function generateTemperatureData() {
-//     return Array.from({ length: 7 }, () => (Math.random() * 40).toFixed(1));
-// }
-
-// function generateVoltageData() {
-//     return Array.from({ length: 7 }, () => (Math.random() * 5 + 10).toFixed(2));
-// }
