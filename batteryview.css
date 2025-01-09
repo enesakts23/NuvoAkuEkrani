@@ -111,7 +111,7 @@
     font-weight: bold;
     margin: 20px auto;
     transition: background-color 0.3s, border-color 0.3s;
-    width: 300px;  /* Genişliği arttırıldı */
+    width: 300px;
     height: 100px;
 }
 
@@ -126,7 +126,6 @@
 .info-item i {
     margin-right: 5px;
 }
-
 
 /* Dark mode */
 .dark-mode .battery-item {
@@ -170,4 +169,15 @@
 
 .dark-mode .info-item {
     color: #dcdcdc;
+}
+
+.dark-mode .additional-item {
+    background-color: #333;
+    border-color: #555;
+    color: #dcdcdc;
+}
+
+.dark-mode .additional-item:hover {
+    background-color: #444;
+    border-color: #666;
 }
