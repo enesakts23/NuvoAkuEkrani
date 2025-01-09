@@ -4,17 +4,15 @@ $username = "root";
 $password = "Enes.aktas2326";
 $dbname = "world";
 
-// Veritabanı bağlantısını oluştur
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Bağlantıyı kontrol et
 if ($conn->connect_error) {
     die("Bağlantı hatası: " . $conn->connect_error);
 }
 
 if(isset($_GET['bat_number'])) {
     $bat_number = $_GET['bat_number'];
-    $sql = "SELECT * FROM akuveriler WHERE bat_number = $bat_number";
+    $sql = "SELECT * FROM akuveriler WHERE bat_number = $bat_number ORDER BY timestamp DESC";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

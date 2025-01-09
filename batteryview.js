@@ -72,6 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Veritabanı verileri:', data);
+                    if (data.length > 0) {
+                        const tempData = data.map(d => parseFloat(d.temperature));
+                        const voltageData = data.map(d => parseFloat(d.voltage));
+
+                        renderTempChart(tempData);
+                        renderVoltageChart(voltageData);
+                    } else {
+                        renderTempChart([]);
+                        renderVoltageChart([]);
+                    }
                 })
                 .catch(error => {
                     console.error('Veri çekme hatası:', error);
@@ -217,7 +227,15 @@ function showBatteryDetails(batteryNum) {
     renderVoltageChart();
 }
 
-function renderTempChart() {
+function renderTempChart(data = [null, null, null, null, null, null, null]) {
+    const chartContainer = document.querySelector('#chart-temp');
+    if (data.every(value => value === null)) {
+        chartContainer.style.display = 'none';
+        return;
+    } else {
+        chartContainer.style.display = 'block';
+    }
+
     const options = {
         chart: {
             type: 'area',
@@ -225,10 +243,10 @@ function renderTempChart() {
         },
         series: [{
             name: 'Sıcaklık',
-            data: generateTemperatureData()
+            data: data
         }],
         xaxis: {
-            categories: ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
+            categories: ['1', '2', '3', '4', '5', '6', '7']
         },
         yaxis: {
             title: {
@@ -242,11 +260,19 @@ function renderTempChart() {
         colors: ['#007bff']
     };
 
-    const chart = new ApexCharts(document.querySelector('#chart-temp'), options);
+    const chart = new ApexCharts(chartContainer, options);
     chart.render();
 }
 
-function renderVoltageChart() {
+function renderVoltageChart(data = [null, null, null, null, null, null, null]) {
+    const chartContainer = document.querySelector('#chart-voltage');
+    if (data.every(value => value === null)) {
+        chartContainer.style.display = 'none';
+        return;
+    } else {
+        chartContainer.style.display = 'block';
+    }
+
     const options = {
         chart: {
             type: 'area',
@@ -254,10 +280,10 @@ function renderVoltageChart() {
         },
         series: [{
             name: 'Voltaj',
-            data: generateVoltageData()
+            data: data
         }],
         xaxis: {
-            categories: ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
+            categories: ['1', '2', '3', '4', '5', '6', '7']
         },
         yaxis: {
             title: {
@@ -271,14 +297,14 @@ function renderVoltageChart() {
         colors: ['#28a745']
     };
 
-    const chart = new ApexCharts(document.querySelector('#chart-voltage'), options);
+    const chart = new ApexCharts(chartContainer, options);
     chart.render();
 }
 
-function generateTemperatureData() {
-    return Array.from({ length: 7 }, () => (Math.random() * 40).toFixed(1));
-}
+// function generateTemperatureData() {
+//     return Array.from({ length: 7 }, () => (Math.random() * 40).toFixed(1));
+// }
 
-function generateVoltageData() {
-    return Array.from({ length: 7 }, () => (Math.random() * 5 + 10).toFixed(2));
-}
+// function generateVoltageData() {
+//     return Array.from({ length: 7 }, () => (Math.random() * 5 + 10).toFixed(2));
+// }
