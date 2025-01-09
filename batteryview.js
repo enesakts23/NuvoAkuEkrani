@@ -9,17 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
     newItem.classList.add('additional-item');
 
     const icons = {
-        t: 'fas fa-thermometer-half', 
-        h: 'fas fa-tint', 
-        q: 'fas fa-wind', 
-        s: 'fas fa-burn', 
-        r: 'fas fa-radiation-alt' 
+        t: 'fas fa-thermometer-half',
+        h: 'fas fa-tint',
+        q: 'fas fa-wind',
+        s: 'fas fa-burn',
+        r: 'fas fa-radiation-alt'
     };
 
     ['t', 'h', 'q', 's', 'r'].forEach(type => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('info-item', `${type}-item`);
-        
+
         const icon = document.createElement('i');
         icon.className = icons[type];
         itemDiv.appendChild(icon);
@@ -171,6 +171,28 @@ function updateBatteryData(battery) {
                 additionalItem.querySelector('.q-item span').textContent = ` ${battery.q}`;
                 additionalItem.querySelector('.s-item span').textContent = ` ${battery.s}`;
                 additionalItem.querySelector('.r-item span').textContent = ` ${battery.r}`;
+
+                // Veri güncellenince siyah daireleri yeşil yap
+                ['t', 'h', 'q', 's', 'r'].forEach(type => {
+                    const circle = additionalItem.querySelector(`.${type}-item`);
+                    if (circle) {
+                        const beforeElement = document.createElement('style');
+                        beforeElement.innerHTML = `
+                            .${type}-item::before {
+                                background-color: green !important;
+                            }
+                        `;
+                        document.head.appendChild(beforeElement);
+
+                        setTimeout(() => {
+                            beforeElement.innerHTML = `
+                                .${type}-item::before {
+                                    background-color: white !important;
+                                }
+                            `;
+                        }, 2000);
+                    }
+                });
             }
         }
     });

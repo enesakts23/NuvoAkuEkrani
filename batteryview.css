@@ -140,9 +140,14 @@
     display: inline-block;
     width: 6px;
     height: 6px;
-    background-color: black;
+    background-color: white;
     border-radius: 50%;
     margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.highlight-circle {
+    background-color: green !important;
 }
 
 /* Dark mode */
