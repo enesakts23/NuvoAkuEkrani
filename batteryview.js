@@ -75,12 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (data.length > 0) {
                         const tempData = data.map(d => parseFloat(d.temperature));
                         const voltageData = data.map(d => parseFloat(d.voltage));
+                        const timestamps = data.map(d => d.timestamp);
 
-                        renderTempChart(tempData);
-                        renderVoltageChart(voltageData);
+                        renderTempChart(tempData, timestamps);
+                        renderVoltageChart(voltageData, timestamps);
                     } else {
-                        renderTempChart([]);
-                        renderVoltageChart([]);
+                        renderTempChart([], []);
+                        renderVoltageChart([], []);
                     }
                 })
                 .catch(error => {
@@ -249,7 +250,7 @@ function showBatteryDetails(batteryNum) {
     renderVoltageChart();
 }
 
-function renderTempChart(data = [null, null, null, null, null, null, null]) {
+function renderTempChart(data = [null, null, null, null, null, null, null], timestamps = []) {
     const chartContainer = document.querySelector('#chart-temp');
     if (data.every(value => value === null)) {
         chartContainer.style.display = 'none';
@@ -268,11 +269,11 @@ function renderTempChart(data = [null, null, null, null, null, null, null]) {
             data: data
         }],
         xaxis: {
-            categories: ['7', '6', '5', '4', '3', '2', '1']
+            categories: timestamps
         },
         yaxis: {
-            min: 15, 
-            max: 35, 
+            min: 15,
+            max: 35,
             title: {
                 text: 'Sıcaklık (°C)'
             }
@@ -288,7 +289,7 @@ function renderTempChart(data = [null, null, null, null, null, null, null]) {
     chart.render();
 }
 
-function renderVoltageChart(data = [null, null, null, null, null, null, null]) {
+function renderVoltageChart(data = [null, null, null, null, null, null, null], timestamps = []) {
     const chartContainer = document.querySelector('#chart-voltage');
     if (data.every(value => value === null)) {
         chartContainer.style.display = 'none';
@@ -307,11 +308,11 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null]) {
             data: data
         }],
         xaxis: {
-            categories: ['7', '6', '5', '4', '3', '2', '1']
+            categories: timestamps
         },
         yaxis: {
-            min: 8, 
-            max: 15, 
+            min: 8,
+            max: 15,
             title: {
                 text: 'Voltaj (V)'
             }
@@ -326,5 +327,3 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null]) {
     const chart = new ApexCharts(chartContainer, options);
     chart.render();
 }
-
-
