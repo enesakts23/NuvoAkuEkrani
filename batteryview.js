@@ -268,9 +268,11 @@ function renderTempChart(data = [null, null, null, null, null, null, null]) {
             data: data
         }],
         xaxis: {
-            categories: ['1', '2', '3', '4', '5', '6', '7']
+            categories: ['7', '6', '5', '4', '3', '2', '1']
         },
         yaxis: {
+            min: 15, 
+            max: 35, 
             title: {
                 text: 'Sıcaklık (°C)'
             }
@@ -305,9 +307,11 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null]) {
             data: data
         }],
         xaxis: {
-            categories: ['1', '2', '3', '4', '5', '6', '7']
+            categories: ['7', '6', '5', '4', '3', '2', '1']
         },
         yaxis: {
+            min: 8, 
+            max: 15, 
             title: {
                 text: 'Voltaj (V)'
             }
@@ -322,4 +326,5 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null]) {
     const chart = new ApexCharts(chartContainer, options);
     chart.render();
 }
+
 
