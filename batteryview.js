@@ -167,8 +167,12 @@ function updateBatteryData(battery) {
         if (battery.id === 15) {
             const additionalItem = document.querySelector('.additional-item');
             if (additionalItem) {
-                additionalItem.querySelector('.t-item span').textContent = ` ${battery.t}°C`;
-                additionalItem.querySelector('.h-item span').textContent = ` ${battery.h}%`;
+                if (battery.t !== 0) {
+                    additionalItem.querySelector('.t-item span').textContent = ` ${battery.t}°C`;
+                }
+                if (battery.h !== 0) {
+                    additionalItem.querySelector('.h-item span').textContent = ` ${battery.h}%`;
+                }
                 additionalItem.querySelector('.q-item span').textContent = ` ${battery.q}`;
                 additionalItem.querySelector('.s-item span').textContent = ` ${battery.s}`;
                 additionalItem.querySelector('.r-item span').textContent = ` ${battery.r}`;
