@@ -262,7 +262,7 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
     const options = {
         chart: {
             type: 'area',
-            height: 350
+            height: 265
         },
         series: [{
             name: 'Sıcaklık',
@@ -279,7 +279,7 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
             }
         },
         title: {
-            text: 'Haftalık Sıcaklık Grafiği',
+            text: 'Günlük Sıcaklık Grafiği',
             align: 'center'
         },
         colors: ['#007bff']
@@ -301,7 +301,7 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
     const options = {
         chart: {
             type: 'area',
-            height: 350
+            height: 265
         },
         series: [{
             name: 'Voltaj',
@@ -318,7 +318,7 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
             }
         },
         title: {
-            text: 'Haftalık Voltaj Grafiği',
+            text: 'Günlük Voltaj Grafiği',
             align: 'center'
         },
         colors: ['#28a745']
