@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const options = {
         chart: {
             type: 'pie',
-            width: 350, // Grafiğin genişliğini biraz daha büyük yapıyoruz
+            width: 350, 
             toolbar: {
                 show: false
             }
         },
-        series: [15, 1], // Çalışan Batarya ve Bozuk Batarya değerleri
+        series: [16, 0], 
         labels: ['Çalışan Batarya', 'Bozuk Batarya'],
         colors: ['#007bff', '#dc3545'],
         responsive: [{
