@@ -273,20 +273,29 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
             data: data
         }],
         xaxis: {
-            categories: timestamps
+            categories: timestamps,
+            labels: {
+                show: false 
+            }
         },
         yaxis: {
-            min: 15,
-            max: 35,
-            title: {
-                text: 'Sıcaklık (°C)'
+            min: 0,
+            max: 45,
+            labels: {
+                show: false 
             }
         },
         title: {
             text: 'Günlük Sıcaklık Grafiği',
             align: 'center'
         },
-        colors: ['#007bff']
+        colors: ['#007bff'],
+        dataLabels: {
+            enabled: false 
+        },
+        tooltip: {
+            enabled: true
+        }
     };
 
     const chart = new ApexCharts(chartContainer, options);
@@ -312,20 +321,29 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
             data: data
         }],
         xaxis: {
-            categories: timestamps
+            categories: timestamps,
+            labels: {
+                show: false 
+            }
         },
         yaxis: {
             min: 8,
             max: 15,
-            title: {
-                text: 'Voltaj (V)'
+            labels: {
+                show: false 
             }
         },
         title: {
             text: 'Günlük Voltaj Grafiği',
             align: 'center'
         },
-        colors: ['#28a745']
+        colors: ['#28a745'],
+        dataLabels: {
+            enabled: false 
+        },
+        tooltip: {
+            enabled: true
+        }
     };
 
     const chart = new ApexCharts(chartContainer, options);
