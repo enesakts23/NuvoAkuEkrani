@@ -10,6 +10,10 @@ function toggleTheme() {
     document.querySelector('.header').classList.toggle('dark-mode');
     document.querySelector('.sidebar').classList.toggle('dark-mode');
     document.querySelector('.content').classList.toggle('dark-mode');
+
+    // Temayı kaydet
+    const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
 }
 
 function showContainer(containerId) {
@@ -62,5 +66,12 @@ function toggleProfileMenu() {
 
 // İlk açıldığında önizleme container'ının açık olmasını sağla
 document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.querySelector('.header').classList.add('dark-mode');
+        document.querySelector('.sidebar').classList.add('dark-mode');
+        document.querySelector('.content').classList.add('dark-mode');
+    }
     showContainer('preview');
 });
