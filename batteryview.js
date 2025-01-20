@@ -280,9 +280,9 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
         },
         yaxis: {
             min: 0,
-            max: 45,
+            max: 90, // Yeni aralık 0 ile 90
             labels: {
-                show: false 
+                show: true 
             }
         },
         title: {
@@ -301,6 +301,7 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
     const chart = new ApexCharts(chartContainer, options);
     chart.render();
 }
+
 
 function renderVoltageChart(data = [null, null, null, null, null, null, null], timestamps = []) {
     const chartContainer = document.querySelector('#chart-voltage');
@@ -328,9 +329,9 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
         },
         yaxis: {
             min: 8,
-            max: 15,
+            max: 15, // Bu aralık 8 ile 15 arasında
             labels: {
-                show: false 
+                show: true 
             }
         },
         title: {
@@ -349,3 +350,5 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
     const chart = new ApexCharts(chartContainer, options);
     chart.render();
 }
+
+
