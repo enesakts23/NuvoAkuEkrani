@@ -350,5 +350,3 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
     const chart = new ApexCharts(chartContainer, options);
     chart.render();
 }
-
-
