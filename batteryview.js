@@ -265,7 +265,7 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
 
     const options = {
         chart: {
-            type: 'area',
+            type: 'area', // Area grafik tipi
             height: 265
         },
         series: [{
@@ -275,14 +275,14 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
         xaxis: {
             categories: timestamps,
             labels: {
-                show: false 
+                show: false // X eksenindeki etiketler gizlendi
             }
         },
         yaxis: {
             min: 0,
-            max: 90, // Yeni aralık 0 ile 90
+            max: 90, // Y ekseninin sınırları
             labels: {
-                show: true 
+                show: true
             }
         },
         title: {
@@ -291,14 +291,15 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
         },
         colors: ['#007bff'],
         dataLabels: {
-            enabled: false 
+            enabled: false // Veri etiketleri devre dışı bırakıldı
         },
         tooltip: {
-            enabled: true
+            enabled: true // Tooltip etkinleştirildi
         },
         stroke: {
-            curve: 'smooth', // Çizgiler düzgün olacak
-            width: 2 // Çizgi kalınlığını 2 yapalım (daha ince)
+            curve: 'smooth', // Yumuşak eğriler
+            width: 2, // Çizgi kalınlığı
+            dashArray: 5 // Kesikli çizgi uzunluğu
         }
     };
 
@@ -317,7 +318,7 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
 
     const options = {
         chart: {
-            type: 'area',
+            type: 'area', // Area grafik tipi
             height: 265
         },
         series: [{
@@ -327,14 +328,14 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
         xaxis: {
             categories: timestamps,
             labels: {
-                show: false 
+                show: false // X eksenindeki etiketler gizlendi
             }
         },
         yaxis: {
             min: 8,
-            max: 15, // Bu aralık 8 ile 15 arasında
+            max: 15, // Y ekseninin sınırları
             labels: {
-                show: true 
+                show: true
             }
         },
         title: {
@@ -343,14 +344,15 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
         },
         colors: ['#28a745'],
         dataLabels: {
-            enabled: false 
+            enabled: false // Veri etiketleri devre dışı bırakıldı
         },
         tooltip: {
-            enabled: true
+            enabled: true // Tooltip etkinleştirildi
         },
         stroke: {
-            curve: 'smooth', // Çizgiler düzgün olacak
-            width: 2 // Çizgi kalınlığını 2 yapalım (daha ince)
+            curve: 'smooth', // Yumuşak eğriler
+            width: 2, // Çizgi kalınlığı
+            dashArray: 5 // Kesikli çizgi uzunluğu
         }
     };
 
