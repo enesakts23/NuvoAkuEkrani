@@ -295,13 +295,16 @@ function renderTempChart(data = [null, null, null, null, null, null, null], time
         },
         tooltip: {
             enabled: true
+        },
+        stroke: {
+            curve: 'smooth', // Çizgiler düzgün olacak
+            width: 2 // Çizgi kalınlığını 2 yapalım (daha ince)
         }
     };
 
     const chart = new ApexCharts(chartContainer, options);
     chart.render();
 }
-
 
 function renderVoltageChart(data = [null, null, null, null, null, null, null], timestamps = []) {
     const chartContainer = document.querySelector('#chart-voltage');
@@ -344,6 +347,10 @@ function renderVoltageChart(data = [null, null, null, null, null, null, null], t
         },
         tooltip: {
             enabled: true
+        },
+        stroke: {
+            curve: 'smooth', // Çizgiler düzgün olacak
+            width: 2 // Çizgi kalınlığını 2 yapalım (daha ince)
         }
     };
 
